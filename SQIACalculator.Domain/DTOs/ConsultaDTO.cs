@@ -1,6 +1,6 @@
-﻿namespace SQIACalculator.Domain.Entities
+﻿namespace SQIACalculator.Domain.DTOs
 {
-    public class Consulta
+    public class ConsultaDTO
     {
         public decimal ValorInicial { get; set; }
         public DateTime DataInicio { get; set; }

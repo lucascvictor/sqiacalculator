@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using SQIACalculator.Domain.Entities;
+using SQIACalculator.Domain.DTOs;
 
 namespace SQIACalculator.API.Validators
 {
-    public class PosFixadoValidator : AbstractValidator<Consulta>
+    public class PosFixadoValidator : AbstractValidator<ConsultaDTO>
     {
         public PosFixadoValidator()
         {

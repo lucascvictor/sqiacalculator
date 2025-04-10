@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SQIACalculator.Domain.Entities;
+using SQIACalculator.Domain.DTOs;
 using SQIACalculator.Domain.Interfaces;
 using System.Text.Json;
 
@@ -13,11 +13,11 @@ namespace SQIACalculator.API.Controllers
         private readonly ILogger _logger = logger;
 
         [HttpGet("posfixado")]
-        public IActionResult PosFixado([FromQuery] Consulta consulta)
+        public IActionResult PosFixado([FromQuery] ConsultaDTO consulta)
         {
             try
             {
-                _logger.LogInformation("Consulta iniciada: {consulta}", JsonSerializer.Serialize(consulta));
+                _logger.LogInformation("ConsultaDTO iniciada: {consulta}", JsonSerializer.Serialize(consulta));
 
                 var resultado = _service.CalcularJurosCompostos(consulta.ValorInicial, consulta.DataInicio, consulta.DataFim);
 

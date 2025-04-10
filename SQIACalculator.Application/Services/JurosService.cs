@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using SQIACalculator.Domain.DTOs;
 using SQIACalculator.Domain.Entities;
 using SQIACalculator.Domain.Interfaces;
 
@@ -9,13 +10,12 @@ namespace SQIACalculator.Application.Services
         private readonly ICotacaoRepository _cotacaorepository = cotacaoRepository;
         private readonly ILogger _logger = logger;
 
-        public Resultado CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim)
+        public ResultadoDTO CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim)
         {
             decimal fatorAcumulado = CalcularFatorAcumulado(dataInicio, dataFim, valorInicial);
             decimal valorFinal = Math.Round(valorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
-            Resultado resultado = new(fatorAcumulado, valorFinal);
 
-            return resultado;
+            return new(fatorAcumulado, valorFinal);
         }
 
         private decimal CalcularFatorAcumulado(DateTime inicio, DateTime fim, decimal valorInicial)

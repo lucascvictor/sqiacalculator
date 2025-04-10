@@ -1,9 +1,9 @@
-﻿using SQIACalculator.Domain.Entities;
+﻿using SQIACalculator.Domain.DTOs;
 
 namespace SQIACalculator.Domain.Interfaces
 {
     public interface IJurosService
     {
-        Resultado CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim);
+        ResultadoDTO CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim);
     }
 }
