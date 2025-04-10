@@ -17,7 +17,6 @@ namespace SQIACalculator.Infrastructure
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString));
 
             services.AddScoped<ICotacaoRepository, CotacaoRepository>();
-
         }
     }
 }

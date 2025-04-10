@@ -59,10 +59,10 @@ namespace SQIACalculator.Infrastructure.Migrations
                     { 32, new DateTime(2025, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.0 },
                     { 33, new DateTime(2025, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.5 },
                     { 34, new DateTime(2025, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 11.0 },
-                    { 35, new DateTime(2025, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.199999999999999 },
+                    { 35, new DateTime(2025, 3, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.2 },
                     { 36, new DateTime(2025, 3, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 13.0 },
                     { 37, new DateTime(2025, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.4 },
-                    { 38, new DateTime(2025, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.699999999999999 }
+                    { 38, new DateTime(2025, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "SQI", 12.7 }
                 });
         }
 
