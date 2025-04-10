@@ -4,6 +4,6 @@
     {
         public DateTime Data { get; set; }
         public string Indexador { get; set; } = null!;
-        public decimal Valor { get; set; }
+        public double Valor { get; set; }
     }
 }
