@@ -7,7 +7,7 @@ namespace SQIACalculator.Application.Services
 {
     public class JurosService(ICotacaoRepository cotacaoRepository, ILogger<JurosService> logger) : IJurosService
     {
-        private readonly ICotacaoRepository _cotacaorepository = cotacaoRepository;
+        private readonly ICotacaoRepository _cotacaoRepository = cotacaoRepository;
         private readonly ILogger _logger = logger;
 
         public ResultadoDTO CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim)
@@ -48,7 +48,7 @@ namespace SQIACalculator.Application.Services
         private Cotacao? EncontrarCotacaoDiaria(DateTime data)
         {
             DateTime diaUtilAnterior = EncontrarDiaUtilAnterior(data);
-            Cotacao? cotacao = _cotacaorepository.GetByDataEIndexador(diaUtilAnterior, "SQI");
+            Cotacao? cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, "SQI");
 
             _logger.LogInformation("Dia util anterior: {diaUtilAnterior}", diaUtilAnterior);
             _logger.LogInformation("Cotação: {valor}", cotacao?.Valor);

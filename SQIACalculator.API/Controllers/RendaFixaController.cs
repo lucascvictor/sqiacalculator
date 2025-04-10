@@ -17,7 +17,7 @@ namespace SQIACalculator.API.Controllers
         {
             try
             {
-                _logger.LogInformation("ConsultaDTO iniciada: {consulta}", JsonSerializer.Serialize(consulta));
+                _logger.LogInformation("Consulta iniciada: {consulta}", JsonSerializer.Serialize(consulta));
 
                 var resultado = _service.CalcularJurosCompostos(consulta.ValorInicial, consulta.DataInicio, consulta.DataFim);
 
