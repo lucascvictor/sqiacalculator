@@ -23,6 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{80C5170B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.Tests", "SQIACalculator.Tests\SQIACalculator.Tests.csproj", "{B20526F1-5678-45A9-89C9-D733E4021A7E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2846B10A-701B-4DEF-8968-FB4277B0F6F4}"
+	ProjectSection(SolutionItems) = preProject
+		Read.me = Read.me
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
