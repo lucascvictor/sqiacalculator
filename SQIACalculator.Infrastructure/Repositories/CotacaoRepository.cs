@@ -4,14 +4,9 @@ using SQIACalculator.Infrastructure.Context;
 
 namespace SQIACalculator.Infrastructure.Repositories
 {
-    public class CotacaoRepository : ICotacaoRepository
+    public class CotacaoRepository(AppDbContext appDbContext) : ICotacaoRepository
     {
-        private AppDbContext _appDbContext;
-
-        public CotacaoRepository(AppDbContext appDbContext) 
-        {
-            _appDbContext = appDbContext;
-        }
+        private readonly AppDbContext _appDbContext = appDbContext;
 
         public Cotacao? GetByDataEIndexador(DateTime data, string indexador)
         {

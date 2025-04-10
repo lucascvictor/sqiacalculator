@@ -4,11 +4,8 @@ using SQIACalculator.Infrastructure.Seeds;
 
 namespace SQIACalculator.Infrastructure.Context
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options) { }
-
         public DbSet<Cotacao> Cotacoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

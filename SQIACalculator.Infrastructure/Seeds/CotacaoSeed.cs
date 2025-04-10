@@ -9,13 +9,13 @@ namespace SQIACalculator.Infrastructure.Seeds
         public void Configure(EntityTypeBuilder<Cotacao> builder)
         {
             builder.HasData(
-                new Cotacao { Id = 1, Data = new DateTime(2025, 1, 1), Indexador = "SQI", Valor = 10.50 },
-                new Cotacao { Id = 2, Data = new DateTime(2025, 1, 2), Indexador = "SQI", Valor = 10.50 },
-                new Cotacao { Id = 3, Data = new DateTime(2025, 1, 3), Indexador = "SQI", Valor = 10.50 },
-                new Cotacao { Id = 6, Data = new DateTime(2025, 1, 6), Indexador = "SQI", Valor = 12.25 },
-                new Cotacao { Id = 7, Data = new DateTime(2025, 1, 7), Indexador = "SQI", Valor = 12.25 },
-                new Cotacao { Id = 8, Data = new DateTime(2025, 1, 8), Indexador = "SQI", Valor = 12.25 },
-                new Cotacao { Id = 9, Data = new DateTime(2025, 1, 9), Indexador = "SQI", Valor = 12.25 },
+                new Cotacao { Id = 1,  Data = new DateTime(2025, 1, 1),  Indexador = "SQI", Valor = 10.50 },
+                new Cotacao { Id = 2,  Data = new DateTime(2025, 1, 2),  Indexador = "SQI", Valor = 10.50 },
+                new Cotacao { Id = 3,  Data = new DateTime(2025, 1, 3),  Indexador = "SQI", Valor = 10.50 },
+                new Cotacao { Id = 6,  Data = new DateTime(2025, 1, 6),  Indexador = "SQI", Valor = 12.25 },
+                new Cotacao { Id = 7,  Data = new DateTime(2025, 1, 7),  Indexador = "SQI", Valor = 12.25 },
+                new Cotacao { Id = 8,  Data = new DateTime(2025, 1, 8),  Indexador = "SQI", Valor = 12.25 },
+                new Cotacao { Id = 9,  Data = new DateTime(2025, 1, 9),  Indexador = "SQI", Valor = 12.25 },
                 new Cotacao { Id = 10, Data = new DateTime(2025, 1, 10), Indexador = "SQI", Valor = 12.25 },
                 new Cotacao { Id = 13, Data = new DateTime(2025, 1, 13), Indexador = "SQI", Valor = 12.25 },
                 new Cotacao { Id = 14, Data = new DateTime(2025, 1, 14), Indexador = "SQI", Valor = 12.25 },

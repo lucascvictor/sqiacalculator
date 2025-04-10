@@ -12,7 +12,7 @@ namespace SQIACalculator.Application.Services
         public Resultado CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim)
         {
             decimal fatorAcumulado = CalcularFatorAcumulado(dataInicio, dataFim, valorInicial);
-            decimal valorFinal = Math.Round((decimal)valorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
+            decimal valorFinal = Math.Round(valorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
             Resultado resultado = new(fatorAcumulado, valorFinal);
 
             return resultado;
