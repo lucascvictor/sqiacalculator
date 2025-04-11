@@ -41,16 +41,16 @@ namespace SQIACalculator.Application.Services
         private decimal FatorDiario(DateTime data)
         {
             Cotacao? cotacao = EncontrarCotacaoDiaria(data);
-            return cotacao != null && cotacao.Valor != default ? CalcularFatorDiario(cotacao.Valor) : 0;
+            return cotacao != null && cotacao.Valor != default ? CalcularFatorDiario(cotacao.Valor) : 1;
         }
 
-        private Cotacao? EncontrarCotacaoDiaria(DateTime data)
+        private Cotacao EncontrarCotacaoDiaria(DateTime data)
         {
             DateTime diaUtilAnterior = EncontrarDiaUtilAnterior(data);
-            Cotacao? cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, Indexadores.SQI);
+            Cotacao cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, Indexadores.SQI);
 
             _logger.LogInformation("Dia útil anterior: {diaUtilAnterior}", diaUtilAnterior);
-            _logger.LogInformation("Cotação: {valor}", cotacao?.Valor);
+            _logger.LogInformation("Cotação: {valor}", cotacao.Valor);
 
             return cotacao;
         }

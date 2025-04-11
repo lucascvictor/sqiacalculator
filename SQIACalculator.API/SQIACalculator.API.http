@@ -1,6 +1,6 @@
 @SQIACalculator.API_HostAddress = http://localhost:5218
 
-GET {{SQIACalculator.API_HostAddress}}/weatherforecast/
+GET {{SQIACalculator.API_HostAddress}}/rendafixa/posfixado/
 Accept: application/json
 
 ###

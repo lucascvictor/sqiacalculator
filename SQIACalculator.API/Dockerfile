@@ -1,25 +1,36 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-
+# ------------------------------
+# Etapa 1: Build da aplicação
+# ------------------------------
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SQIACalculator.API/SQIACalculator.API.csproj", "SQIACalculator.API/"]
-RUN dotnet restore "./SQIACalculator.API/SQIACalculator.API.csproj"
-COPY . .
-WORKDIR "/src/SQIACalculator.API"
-RUN dotnet build "./SQIACalculator.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SQIACalculator.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+# Copia arquivos da solução e projetos relacionados
+COPY ../SQIACalculator.Docker.sln ./
+COPY ../SQIACalculator.API/*.csproj ./SQIACalculator.API/
+COPY ../SQIACalculator.Application/*.csproj ./SQIACalculator.Application/
+COPY ../SQIACalculator.Domain/*.csproj ./SQIACalculator.Domain/
+COPY ../SQIACalculator.Infrastructure/*.csproj ./SQIACalculator.Infrastructure/
 
-FROM base AS final
+# Restaura pacotes
+RUN dotnet restore
+
+# Copia todo o conteúdo da solução
+COPY .. .
+
+# Publica a API em modo Release
+RUN dotnet publish SQIACalculator.API/SQIACalculator.API.csproj -c Release -o /app/publish
+
+# ------------------------------
+# Etapa 2: Imagem final
+# ------------------------------
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+
+# Copia o conteúdo publicado
+COPY --from=build /app/publish .
+
+# Expõe a porta da aplicação
+EXPOSE 80
+
+# Executa a aplicação
 ENTRYPOINT ["dotnet", "SQIACalculator.API.dll"]

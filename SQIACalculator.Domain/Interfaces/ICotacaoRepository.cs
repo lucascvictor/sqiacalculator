@@ -4,6 +4,6 @@ namespace SQIACalculator.Domain.Interfaces
 {
     public interface ICotacaoRepository
     {
-        Cotacao? GetByDataEIndexador(DateTime data, string indexador);
+        Cotacao GetByDataEIndexador(DateTime data, string indexador);
     }
 }

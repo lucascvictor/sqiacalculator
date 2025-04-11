@@ -1,0 +1,32 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    volumes:
+      - ./mssql_data:/var/opt/mssql/data
+      - ./scripts:/scripts
+    environment:
+      SA_PASSWORD: "00112233@sqia"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    entrypoint: ["/bin/bash", "/scripts/entrypoint.sh"]
+
+  sqia-calculator-api:
+    container_name: sqia-calculator-api
+    image: localhost/sqia-calculator-api:latest
+    depends_on:
+        - sqlserver
+    build:
+      context: ../.
+      dockerfile: ./SQIACalculator.API/Dockerfile
+    command: >
+      sh -c "dotnet ef database update --project ../SQIACalculator.Infrastructure/SQIACalculator.Infrastructure.csproj
+             --startup-project ./SQIACalculator.API.csproj &&
+             dotnet SQIACalculator.API.dll"
+    ports:
+      - "5622:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
+

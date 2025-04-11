@@ -11,21 +11,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C2D41E67-955C-402F-ADC3-3DA5A36D566D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.API", "SQIACalculator.API\SQIACalculator.API.csproj", "{8E04D249-5F02-45B8-83F1-9ADDB143478E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQIACalculator.API", "SQIACalculator.API\SQIACalculator.API.csproj", "{8E04D249-5F02-45B8-83F1-9ADDB143478E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.Application", "SQIACalculator.Application\SQIACalculator.Application.csproj", "{99E3CD12-C54C-4CC2-88F1-0E51C93E35CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQIACalculator.Application", "SQIACalculator.Application\SQIACalculator.Application.csproj", "{99E3CD12-C54C-4CC2-88F1-0E51C93E35CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.Domain", "SQIACalculator.Domain\SQIACalculator.Domain.csproj", "{D2A329A7-E3B0-4BA1-9AF5-0C46ED581E5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQIACalculator.Domain", "SQIACalculator.Domain\SQIACalculator.Domain.csproj", "{D2A329A7-E3B0-4BA1-9AF5-0C46ED581E5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.Infrastructure", "SQIACalculator.Infrastructure\SQIACalculator.Infrastructure.csproj", "{1F1BC190-7423-429B-BCD5-31990F877967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQIACalculator.Infrastructure", "SQIACalculator.Infrastructure\SQIACalculator.Infrastructure.csproj", "{1F1BC190-7423-429B-BCD5-31990F877967}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{80C5170B-5C26-4CD3-9B16-ADC1598249FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQIACalculator.Tests", "SQIACalculator.Tests\SQIACalculator.Tests.csproj", "{B20526F1-5678-45A9-89C9-D733E4021A7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SQIACalculator.Tests", "SQIACalculator.Tests\SQIACalculator.Tests.csproj", "{B20526F1-5678-45A9-89C9-D733E4021A7E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2846B10A-701B-4DEF-8968-FB4277B0F6F4}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
 		Read.me = Read.me
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{8091C70F-3217-4CFE-830B-5E39ABB9A184}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\entrypoint.sh = scripts\entrypoint.sh
+		init.sql = init.sql
 	EndProjectSection
 EndProject
 Global
@@ -64,6 +71,7 @@ Global
 		{D2A329A7-E3B0-4BA1-9AF5-0C46ED581E5E} = {32D9E830-08CB-4845-BB42-74A648517B4C}
 		{1F1BC190-7423-429B-BCD5-31990F877967} = {331B47FA-05EF-42BE-82F1-55A939735476}
 		{B20526F1-5678-45A9-89C9-D733E4021A7E} = {80C5170B-5C26-4CD3-9B16-ADC1598249FD}
+		{8091C70F-3217-4CFE-830B-5E39ABB9A184} = {2846B10A-701B-4DEF-8968-FB4277B0F6F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E844D9D0-EA75-4728-8261-F0FF8B0F03C1}
