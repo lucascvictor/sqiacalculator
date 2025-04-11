@@ -23,6 +23,9 @@ builder.Services.AddFluentValidationValidators();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+if (Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true")
+    builder.WebHost.UseUrls("http://0.0.0.0:80");
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

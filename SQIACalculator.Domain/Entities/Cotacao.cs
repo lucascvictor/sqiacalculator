@@ -26,7 +26,7 @@ namespace SQIACalculator.Domain.Entities
             DateTime diaUtilAnterior = EncontrarDiaUtilAnterior(data);
             Cotacao cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, Indexadores.SQI);
 
-            return cotacao.Valor;
+            return cotacao?.Valor ?? default;
         }
 
         private static DateTime EncontrarDiaUtilAnterior(DateTime data)

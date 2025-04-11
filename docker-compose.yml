@@ -30,3 +30,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     restart: always
 
+networks:
+  local-network:
+    driver: bridge
+
