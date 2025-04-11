@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SQIACalculator.Application.Decorators;
 using SQIACalculator.Application.Services;
 using SQIACalculator.Domain.Interfaces;
 
@@ -9,6 +10,7 @@ namespace SQIACalculator.Application
         public static void ConfigureApplicationApp(this IServiceCollection services)
         {
             services.AddScoped<IRendaFixaService, RendaFixaService>();
+            services.Decorate<IRendaFixaService, RendaFixaServiceDecorator>();
         }
     }
 }

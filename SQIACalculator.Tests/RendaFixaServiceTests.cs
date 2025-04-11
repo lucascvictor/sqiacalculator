@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Moq;
+﻿using Moq;
 using SQIACalculator.Application.Services;
 using SQIACalculator.Domain.Commons;
 using SQIACalculator.Domain.DTOs;
@@ -11,14 +10,12 @@ namespace SQIACalculator.Tests
     public class RendaFixaServiceTests
     {
         private readonly Mock<ICotacaoRepository> _mockCotacaoRepository;
-        private readonly Mock<ILogger<RendaFixaService>> _mockLogger;
         private readonly RendaFixaService _rendaFixaService;
 
         public RendaFixaServiceTests()
         {
             _mockCotacaoRepository = new Mock<ICotacaoRepository>();
-            _mockLogger = new Mock<ILogger<RendaFixaService>>();
-            _rendaFixaService = new RendaFixaService(_mockCotacaoRepository.Object, _mockLogger.Object);
+            _rendaFixaService = new RendaFixaService(_mockCotacaoRepository.Object);
         }
 
         [Fact]

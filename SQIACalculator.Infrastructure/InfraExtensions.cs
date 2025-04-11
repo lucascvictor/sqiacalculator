@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SQIACalculator.Domain.Interfaces;
 using SQIACalculator.Infrastructure.Context;
+using SQIACalculator.Infrastructure.Decorators;
 using SQIACalculator.Infrastructure.Repositories;
 
 namespace SQIACalculator.Infrastructure
@@ -17,6 +18,7 @@ namespace SQIACalculator.Infrastructure
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(connectionString));
 
             services.AddScoped<ICotacaoRepository, CotacaoRepository>();
+            services.Decorate<ICotacaoRepository, CotacaoRepositoryDecorator>();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SQIACalculator.Domain.DTOs;
 using SQIACalculator.Domain.Interfaces;
-using System.Text.Json;
 
 namespace SQIACalculator.API.Controllers
 {
@@ -17,7 +16,6 @@ namespace SQIACalculator.API.Controllers
         {
             try
             {
-                _logger.LogInformation("Consulta iniciada: {consulta}", JsonSerializer.Serialize(consulta));
                 return Ok(_service.CalcularIndexadorPosFixado(consulta));
             }
             catch (Exception ex)

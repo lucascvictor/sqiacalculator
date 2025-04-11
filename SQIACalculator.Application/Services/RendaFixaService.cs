@@ -1,15 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
-using SQIACalculator.Domain.Commons;
+﻿using SQIACalculator.Domain.Commons;
 using SQIACalculator.Domain.DTOs;
 using SQIACalculator.Domain.Entities;
 using SQIACalculator.Domain.Interfaces;
 
 namespace SQIACalculator.Application.Services
 {
-    public class RendaFixaService(ICotacaoRepository cotacaoRepository, ILogger<RendaFixaService> logger) : IRendaFixaService
+    public class RendaFixaService(ICotacaoRepository cotacaoRepository) : IRendaFixaService
     {
         private readonly ICotacaoRepository _cotacaoRepository = cotacaoRepository;
-        private readonly ILogger _logger = logger;
 
         public ResultadoPosFixadoDTO CalcularIndexadorPosFixado(ConsultaPosFixadoDTO consulta)
         {
@@ -27,12 +25,6 @@ namespace SQIACalculator.Application.Services
             {
                 if (!data.Equals(consulta.DataInicial) && data.DayOfWeek != DayOfWeek.Saturday && data.DayOfWeek != DayOfWeek.Sunday)
                     fatorAcumulado *= FatorDiario(data);
-                
-                decimal valorAtualizado = Math.Round(consulta.ValorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
-
-                _logger.LogInformation("Fator acumulado: {fatorAcumulado}", fatorAcumulado);
-                _logger.LogInformation("Valor atualizado: {valorAtualizado}", valorAtualizado);
-                _logger.LogInformation(new string('_', 40) + "\n");
             }
 
             return fatorAcumulado;
@@ -41,16 +33,13 @@ namespace SQIACalculator.Application.Services
         private decimal FatorDiario(DateTime data)
         {
             Cotacao? cotacao = EncontrarCotacaoDiaria(data);
-            return cotacao != null && cotacao.Valor != default ? CalcularFatorDiario(cotacao.Valor) : 1;
+            return cotacao != null && cotacao.Valor != default ? Calculos.FatorDiario(cotacao.Valor) : 1;
         }
 
         private Cotacao EncontrarCotacaoDiaria(DateTime data)
         {
             DateTime diaUtilAnterior = EncontrarDiaUtilAnterior(data);
             Cotacao cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, Indexadores.SQI);
-
-            _logger.LogInformation("Dia útil anterior: {diaUtilAnterior}", diaUtilAnterior);
-            _logger.LogInformation("Cotação: {valor}", cotacao.Valor);
 
             return cotacao;
         }
@@ -63,13 +52,6 @@ namespace SQIACalculator.Application.Services
                 diaAnterior = diaAnterior.AddDays(-1);
 
             return diaAnterior;
-        }
-
-        private decimal CalcularFatorDiario(double taxaAnual)
-        {
-            decimal fatorDiario = Math.Round((decimal)Math.Pow(1 + (taxaAnual / 100), 1.0 / 252), 16);
-            _logger.LogInformation("Fator diário: {valor}", Math.Round(fatorDiario, 8, MidpointRounding.ToZero));
-            return fatorDiario;
         }
     }
 }
