@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SQIACalculator.Application\SQIACalculator.Application.csproj" />
+    <ProjectReference Include="..\SQIACalculator.Domain\SQIACalculator.Domain.csproj" />
     <ProjectReference Include="..\SQIACalculator.Infrastructure\SQIACalculator.Infrastructure.csproj" />
   </ItemGroup>
 
