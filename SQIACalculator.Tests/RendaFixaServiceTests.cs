@@ -10,12 +10,16 @@ namespace SQIACalculator.Tests
     public class RendaFixaServiceTests
     {
         private readonly Mock<ICotacaoRepository> _mockCotacaoRepository;
+        private readonly Cotacao _cotacao;
+        private readonly RendaFixa _rendaFixa;
         private readonly RendaFixaService _rendaFixaService;
 
         public RendaFixaServiceTests()
         {
             _mockCotacaoRepository = new Mock<ICotacaoRepository>();
-            _rendaFixaService = new RendaFixaService(_mockCotacaoRepository.Object);
+            _cotacao = new Cotacao(_mockCotacaoRepository.Object);
+            _rendaFixa = new RendaFixa(_cotacao);
+            _rendaFixaService = new RendaFixaService(_rendaFixa);
         }
 
         [Fact]

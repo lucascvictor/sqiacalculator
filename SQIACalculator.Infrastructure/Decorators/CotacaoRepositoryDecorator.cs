@@ -16,7 +16,6 @@ namespace SQIACalculator.Infrastructure.Decorators
         {
             _inner = inner;
             _logger = logger;
-
         }
 
         public Cotacao GetByDataEIndexador(DateTime data, string indexador)
