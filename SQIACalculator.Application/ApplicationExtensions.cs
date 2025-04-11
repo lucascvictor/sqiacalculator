@@ -8,7 +8,7 @@ namespace SQIACalculator.Application
     {
         public static void ConfigureApplicationApp(this IServiceCollection services)
         {
-            services.AddScoped<IJurosService, JurosService>();
+            services.AddScoped<IRendaFixaService, RendaFixaService>();
         }
     }
 }

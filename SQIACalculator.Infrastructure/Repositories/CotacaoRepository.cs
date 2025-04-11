@@ -8,9 +8,13 @@ namespace SQIACalculator.Infrastructure.Repositories
     {
         private readonly AppDbContext _appDbContext = appDbContext;
 
-        public Cotacao? GetByDataEIndexador(DateTime data, string indexador)
+        public Cotacao GetByDataEIndexador(DateTime data, string indexador)
         {
-            return _appDbContext.Cotacoes.FirstOrDefault(c => c.Data == data && c.Indexador == indexador);
+            var cotacao = _appDbContext.Cotacoes.FirstOrDefault(c => c.Data == data && c.Indexador.Equals(indexador));
+            
+            cotacao ??= new Cotacao { Data = default, Indexador = string.Empty, Valor = default };
+
+            return cotacao;
         }
     }
 }

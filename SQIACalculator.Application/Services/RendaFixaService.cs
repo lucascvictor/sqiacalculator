@@ -1,35 +1,34 @@
 ﻿using Microsoft.Extensions.Logging;
+using SQIACalculator.Domain.Commons;
 using SQIACalculator.Domain.DTOs;
 using SQIACalculator.Domain.Entities;
 using SQIACalculator.Domain.Interfaces;
 
 namespace SQIACalculator.Application.Services
 {
-    public class JurosService(ICotacaoRepository cotacaoRepository, ILogger<JurosService> logger) : IJurosService
+    public class RendaFixaService(ICotacaoRepository cotacaoRepository, ILogger<RendaFixaService> logger) : IRendaFixaService
     {
         private readonly ICotacaoRepository _cotacaoRepository = cotacaoRepository;
         private readonly ILogger _logger = logger;
 
-        public ResultadoDTO CalcularJurosCompostos(decimal valorInicial, DateTime dataInicio, DateTime dataFim)
+        public ResultadoPosFixadoDTO CalcularIndexadorPosFixado(ConsultaPosFixadoDTO consulta)
         {
-            decimal fatorAcumulado = CalcularFatorAcumulado(dataInicio, dataFim, valorInicial);
-            decimal valorFinal = Math.Round(valorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
+            decimal fatorAcumulado = CalcularFatorAcumulado(consulta);
+            decimal valorFinal = Math.Round(consulta.ValorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
 
             return new(fatorAcumulado, valorFinal);
         }
 
-        private decimal CalcularFatorAcumulado(DateTime inicio, DateTime fim, decimal valorInicial)
+        private decimal CalcularFatorAcumulado(ConsultaPosFixadoDTO consulta)
         {
             decimal fatorAcumulado = 1;
 
-            for (var data = inicio; data <= fim; data = data.AddDays(1))
+            for (var data = consulta.DataInicial; data <= consulta.DataFinal; data = data.AddDays(1))
             {
-                if (!data.Equals(inicio) && data.DayOfWeek != DayOfWeek.Saturday && data.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    fatorAcumulado *= DefinirFatorDiario(data);
-                }
+                if (!data.Equals(consulta.DataInicial) && data.DayOfWeek != DayOfWeek.Saturday && data.DayOfWeek != DayOfWeek.Sunday)
+                    fatorAcumulado *= FatorDiario(data);
                 
-                decimal valorAtualizado = Math.Round(valorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
+                decimal valorAtualizado = Math.Round(consulta.ValorInicial * fatorAcumulado, 2, MidpointRounding.ToZero);
 
                 _logger.LogInformation("Fator acumulado: {fatorAcumulado}", fatorAcumulado);
                 _logger.LogInformation("Valor atualizado: {valorAtualizado}", valorAtualizado);
@@ -39,7 +38,7 @@ namespace SQIACalculator.Application.Services
             return fatorAcumulado;
         }
 
-        private decimal DefinirFatorDiario(DateTime data)
+        private decimal FatorDiario(DateTime data)
         {
             Cotacao? cotacao = EncontrarCotacaoDiaria(data);
             return cotacao != null && cotacao.Valor != default ? CalcularFatorDiario(cotacao.Valor) : 0;
@@ -48,9 +47,9 @@ namespace SQIACalculator.Application.Services
         private Cotacao? EncontrarCotacaoDiaria(DateTime data)
         {
             DateTime diaUtilAnterior = EncontrarDiaUtilAnterior(data);
-            Cotacao? cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, "SQI");
+            Cotacao? cotacao = _cotacaoRepository.GetByDataEIndexador(diaUtilAnterior, Indexadores.SQI);
 
-            _logger.LogInformation("Dia util anterior: {diaUtilAnterior}", diaUtilAnterior);
+            _logger.LogInformation("Dia útil anterior: {diaUtilAnterior}", diaUtilAnterior);
             _logger.LogInformation("Cotação: {valor}", cotacao?.Valor);
 
             return cotacao;
@@ -69,7 +68,7 @@ namespace SQIACalculator.Application.Services
         private decimal CalcularFatorDiario(double taxaAnual)
         {
             decimal fatorDiario = Math.Round((decimal)Math.Pow(1 + (taxaAnual / 100), 1.0 / 252), 16);
-            _logger.LogInformation("Fator Diário: {valor}", Math.Round(fatorDiario, 8, MidpointRounding.ToZero));
+            _logger.LogInformation("Fator diário: {valor}", Math.Round(fatorDiario, 8, MidpointRounding.ToZero));
             return fatorDiario;
         }
     }

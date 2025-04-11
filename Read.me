@@ -1,7 +1,11 @@
 
 
 
+
 Possibilidades de melhorias imediatas:
 
-Poderiamos prosseguir com a utilização do pacote abaixo para adaptar a saída de logs para o DataDog:
- - dotnet add package Serilog.Sinks.Datadog.Logs
+	Poderiamos prosseguir com a utilização do pacote abaixo para adaptar a saída de logs para o DataDog:
+	 - dotnet add package Serilog.Sinks.Datadog.Logs
+
+	Em um cenário temporário, poderiamos ativar os logs com txt para avaliação posterior:
+	 - .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)

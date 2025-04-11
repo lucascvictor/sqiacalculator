@@ -7,25 +7,22 @@ namespace SQIACalculator.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RendaFixaController(IJurosService service, ILogger<RendaFixaController> logger) : ControllerBase
+    public class RendaFixaController(IRendaFixaService service, ILogger<RendaFixaController> logger) : ControllerBase
     {
-        private readonly IJurosService _service = service;
+        private readonly IRendaFixaService _service = service;
         private readonly ILogger _logger = logger;
 
         [HttpGet("posfixado")]
-        public IActionResult PosFixado([FromQuery] ConsultaDTO consulta)
+        public IActionResult PosFixado([FromQuery] ConsultaPosFixadoDTO consulta)
         {
             try
             {
                 _logger.LogInformation("Consulta iniciada: {consulta}", JsonSerializer.Serialize(consulta));
-
-                var resultado = _service.CalcularJurosCompostos(consulta.ValorInicial, consulta.DataInicio, consulta.DataFim);
-
-                return Ok(resultado);
+                return Ok(_service.CalcularIndexadorPosFixado(consulta));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao calcular juros para este título pós fixado");
+                _logger.LogError(ex, "Erro ao calcular aplicação do indexador para este título pós fixado");
                 return StatusCode(500, "Erro interno");
             }
         }
